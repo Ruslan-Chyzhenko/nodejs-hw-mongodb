@@ -5,6 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src/**/*.js",
+    "start": "node ./src/index.js",
+    "dev": "nodemon src/index.js",
     "get-all": "node src/scripts/getAllContacts.js",
     "generate": "node src/scripts/generateContacts.js",
     "add-one": "node src/scripts/addOneContact.js",
@@ -20,6 +23,7 @@
     "@faker-js/faker": "^9.0.3",
     "eslint": "^9.2.0",
     "globals": "^15.1.0",
+    "nodemon": "^3.1.7",
     "pino-pretty": "^11.2.2"
   },
   "dependencies": {
