@@ -4,17 +4,17 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { env } from './utils/env.js';
-import { ENV_VARS } from './constants/index.js';
-import { errorHandlerMiddleware } from './middlewares/errorHandlerMiddleware.js';
-import { notFoundMiddleware } from './middlewares/notFoundMiddleware.js';
+// import { env } from './utils/env.js';
+// import { ENV_VARS } from './constants/index.js';
+// import { errorHandlerMiddleware } from './middlewares/errorHandlerMiddleware.js';
+// import { notFoundMiddleware } from './middlewares/notFoundMiddleware.js';
 import { getAllContacts, getContactById } from './services/contacts.js';
 
 dotenv.config();
 
 // const PORT = Number(env('PORT', '3000'));
-
-export const startServer = () => {
+const PORT = Number(process.env.PORT);
+export const setupServer = () => {
   const app = express();
 
   // app.use(express.json());
@@ -78,11 +78,11 @@ export const startServer = () => {
   //   });
   // });
 
-  app.use(notFoundMiddleware);
+  // app.use(notFoundMiddleware);
 
-  app.use(errorHandlerMiddleware);
+  // app.use(errorHandlerMiddleware);
 
-  const PORT = env(ENV_VARS.PORT, 3000);
+  // const PORT = env(ENV_VARS.PORT, 3000);
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}!`);
   });
