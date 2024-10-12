@@ -5,7 +5,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 // import { getAllContacts, getContactById } from './services/contacts.js';
-import contactsRouter from './routers/contacts';
+import contactsRouter from './routers/contacts.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 

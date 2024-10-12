@@ -9,7 +9,7 @@ import {
 } from '../controllers/contacts.js';
 // import { getAllContacts, getContactById } from '../services/contacts';
 import { Router } from 'express';
-import { ctrlWrapper } from '../utils/ctrlWrapper';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 const contactsRouter = Router();
 
