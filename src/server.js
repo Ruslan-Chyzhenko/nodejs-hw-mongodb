@@ -13,7 +13,6 @@ dotenv.config();
 const PORT = Number(process.env.PORT);
 export const setupServer = () => {
   const app = express();
-  app.use(cors());
 
   app.use(
     pino({
@@ -22,6 +21,10 @@ export const setupServer = () => {
       },
     }),
   );
+
+  app.use(cors());
+
+  app.use(express.json());
 
   app.use(contactsRouter);
 
