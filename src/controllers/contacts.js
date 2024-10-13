@@ -7,9 +7,6 @@ import {
   updateContact,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
-// import { createContact } from '../services/contacts';
-// import { deleteContact } from '../services/contacts';
-// import { updateContact } from '../services/contacts';
 
 export const getContactsController = async (req, res, next) => {
   try {
@@ -28,17 +25,7 @@ export const getContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactId;
   const contact = await getContactById(contactId);
 
-  //   if (!contact) {
-  //     res.status(404).json({
-  //       status: 404,
-  //       message: `Contact with id ${contactId} not found`,
-  //     });
-  //     return;
-  //   }
-
-  if (!contact) {
-    // next(new Error('Contact not found'));
-    // return;
+    if (!contact) {
     throw createHttpError(404, 'Student not found');
   }
 
