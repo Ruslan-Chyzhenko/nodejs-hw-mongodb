@@ -1,4 +1,4 @@
-// src/routers/students.js
+// src/routers/contacts.js
 import {
   getContactsController,
   getContactByIdController,
