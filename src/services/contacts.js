@@ -84,9 +84,7 @@ export const updateContact = async (contactId, payload, options = {}) => {
   // if (!rawResult || !rawResult.value) return null;
   if (!contact) return null;
 
-  return {
-    contact: contact,
-    // contact: rawResult.value,
-    // isNew: Boolean(rawResult?.lastErrorObject?.upserted),
-  };
+  return contact;
+  // contact: rawResult.value,
+  // isNew: Boolean(rawResult?.lastErrorObject?.upserted),
 };
