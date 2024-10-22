@@ -57,6 +57,7 @@ export const createContactController = async (req, res) => {
   //   age: req.body.age,
   //   onDuty: req.body.onDuty,
   // };
+  console.log('POST Request Body:', req.body);
   const contact = await createContact(req.body);
 
   res.status(201).json({
@@ -100,18 +101,21 @@ export const upsertContactController = async (req, res, next) => {
 };
 
 export const patchContactController = async (req, res, next) => {
+  console.log('PATCH Request Body:', req.body);
   const { contactId } = req.params;
-  const result = await updateContact(contactId, req.body);
+  const contact = await updateContact(contactId, req.body);
 
-  if (!result) {
+  if (!contact) {
     next(createHttpError(404, 'Contact not found'));
     return;
   }
 
+  // const { contact } = result;
+
   res.json({
     status: 200,
     message: `Successfully patched a contact!`,
-    data: result,
+    data: contact,
     // data: result.contact,
   });
 };

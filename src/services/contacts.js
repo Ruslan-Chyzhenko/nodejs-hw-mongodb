@@ -1,3 +1,5 @@
+// src/services/contacts.js
+
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../constants/index.js';
@@ -69,20 +71,22 @@ export const deleteContact = async (contactId) => {
 };
 
 export const updateContact = async (contactId, payload, options = {}) => {
-  const rawResult = await ContactsCollection.findOneAndUpdate(
+  const contact = await ContactsCollection.findOneAndUpdate(
     { _id: contactId },
     payload,
     {
       new: true,
-      includeResultMetadata: true,
+      // includeResultMetadata: true,
       ...options,
     },
   );
 
-  if (!rawResult || !rawResult.value) return null;
+  // if (!rawResult || !rawResult.value) return null;
+  if (!contact) return null;
 
   return {
-    contact: rawResult.value,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+    contact: contact,
+    // contact: rawResult.value,
+    // isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
