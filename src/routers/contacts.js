@@ -7,7 +7,7 @@ import {
   upsertContactController,
   patchContactController,
 } from '../controllers/contacts.js';
-// import { Router } from 'express';
+
 import express from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -28,12 +28,6 @@ contactsRouter.get(
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
-
-// contactsRouter.post(
-//   '/contacts',
-//   jsonParser,
-//   ctrlWrapper(createContactController),
-// );
 
 contactsRouter.delete(
   '/contacts/:contactId',

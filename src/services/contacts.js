@@ -32,13 +32,7 @@ export const getAllContacts = async ({
     contactsQuery.where('avgMark').gte(filter.minAvgMark);
   }
 
-  // const contactsCount = await ContactsCollection.find()
-  //   .merge(contactsQuery)
-  //   .countDocuments();
-
-  // const contacts = await contactsQuery.skip(skip).limit(limit).exec();
-
-  const [contactsCount, contacts] = await Promise.all([
+ const [contactsCount, contacts] = await Promise.all([
     ContactsCollection.find().merge(contactsQuery).countDocuments(),
     contactsQuery
       .skip(skip)
@@ -76,15 +70,11 @@ export const updateContact = async (contactId, payload, options = {}) => {
     payload,
     {
       new: true,
-      // includeResultMetadata: true,
       ...options,
     },
   );
 
-  // if (!rawResult || !rawResult.value) return null;
   if (!contact) return null;
 
   return contact;
-  // contact: rawResult.value,
-  // isNew: Boolean(rawResult?.lastErrorObject?.upserted),
 };
