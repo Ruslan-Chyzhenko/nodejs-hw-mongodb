@@ -49,14 +49,6 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res) => {
-  // console.log({body: req.body})
-
-  // const contact = {
-  //   name: req.body.name,
-  //   gender: req.body.gender,
-  //   age: req.body.age,
-  //   onDuty: req.body.onDuty,
-  // };
   console.log('POST Request Body:', req.body);
   const contact = await createContact(req.body);
 
@@ -96,7 +88,6 @@ export const upsertContactController = async (req, res, next) => {
     status,
     message: `Successfully upserted a contact!`,
     data: result,
-    // data: result.contact,
   });
 };
 
@@ -110,13 +101,9 @@ export const patchContactController = async (req, res, next) => {
     return;
   }
 
-  // const { contact } = result;
-
   res.json({
     status: 200,
     message: `Successfully patched a contact!`,
     data: contact,
-    // data: { ...contact._doc },
-    // data: result.contact,
   });
 };
