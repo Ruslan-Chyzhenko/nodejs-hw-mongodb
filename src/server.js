@@ -26,7 +26,7 @@ export const setupServer = () => {
 
   app.use(express.json());
 
-  app.use('/contacts', contactsRouter);
+  app.use(contactsRouter);
 
   app.use('*', notFoundHandler);
 
