@@ -21,12 +21,12 @@ export const createContactSchema = Joi.object({
 });
 
 export const updateContactSchema = Joi.object({
-  name: Joi.string().min(3).max(20),
-  phoneNumber: Joi.string(),
-  email: Joi.string().email(),
-  isFavorite: Joi.boolean(),
-  contactType: Joi.string().valid('work', 'home', 'personal'),
-});
+  name: Joi.string().min(3).max(20).optional,
+  phoneNumber: Joi.string().optional,
+  email: Joi.string().email().optional,
+  isFavorite: Joi.boolean().optional,
+  contactType: Joi.string().valid('work', 'home', 'personal').optional,
+}).min(1);
 
 // export const createContactSchema = Joi.object({
 //   name: Joi.string().min(3).max(20).required(),
