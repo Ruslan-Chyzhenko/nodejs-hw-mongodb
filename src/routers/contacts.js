@@ -58,7 +58,7 @@ contactsRouter.patch(
 );
 
 contactsRouter.post(
-  '/',
+  '/contacts',
   jsonParser,
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
