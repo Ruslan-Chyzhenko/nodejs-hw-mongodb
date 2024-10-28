@@ -16,26 +16,26 @@ import { createContactSchema } from '../validation/contacts.js';
 import { updateContactSchema } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
 
-const router = express.Router();
+const contactsRouter = express.Router();
 const jsonParser = express.json({
   type: 'application/json',
 });
 
-router.get('/contacts', ctrlWrapper(getContactsController));
+contactsRouter.get('/contacts', ctrlWrapper(getContactsController));
 
-router.get(
+contactsRouter.get(
   '/contacts/:contactId',
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 
-router.delete(
+contactsRouter.delete(
   '/contacts/:contactId',
   isValidId,
   ctrlWrapper(deleteContactController),
 );
 
-router.put(
+contactsRouter.put(
   '/contacts/:contactId',
   isValidId,
   jsonParser,
@@ -43,7 +43,7 @@ router.put(
   ctrlWrapper(upsertContactController),
 );
 
-router.patch(
+contactsRouter.patch(
   '/contacts/:contactId',
   isValidId,
   jsonParser,
@@ -51,18 +51,18 @@ router.patch(
   ctrlWrapper(patchContactController),
 );
 
-router.post(
+contactsRouter.post(
   '/auth/register',
   jsonParser,
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
-// router.post(
+// contactsRouter.post(
 //   '/contacts',
 //   jsonParser,
 //   validateBody(createContactSchema),
 //   ctrlWrapper(createContactController),
 // );
 
-export default router;
+export default contactsRouter;
