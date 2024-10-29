@@ -10,6 +10,8 @@ import { registerUserSchema, loginUserSchema } from '../validation/auth.js';
 import {
   registerUserController,
   loginUserController,
+  logoutUserController,
+  refreshUserSessionController,
 } from '../controllers/auth.js';
 
 const authRouter = Router();
@@ -25,6 +27,10 @@ authRouter.post(
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
+
+authRouter.post('/logout', ctrlWrapper(logoutUserController));
+
+authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
 export default authRouter;
 
