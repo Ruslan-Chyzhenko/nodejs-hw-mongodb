@@ -15,11 +15,16 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { createContactSchema } from '../validation/contacts.js';
 import { updateContactSchema } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const contactsRouter = express.Router();
 const jsonParser = express.json({
   type: 'application/json',
 });
+
+contactsRouter.use(authenticate);
+
+contactsRouter.get('/', ctrlWrapper(getContactsController));
 
 contactsRouter.get('/contacts', ctrlWrapper(getContactsController));
 
@@ -52,7 +57,7 @@ contactsRouter.patch(
 );
 
 contactsRouter.post(
-  '/auth/register',
+  '/register',
   jsonParser,
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
