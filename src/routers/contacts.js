@@ -63,11 +63,4 @@ contactsRouter.post(
   ctrlWrapper(createContactController),
 );
 
-// contactsRouter.post(
-//   '/contacts',
-//   jsonParser,
-//   validateBody(createContactSchema),
-//   ctrlWrapper(createContactController),
-// );
-
 export default contactsRouter;

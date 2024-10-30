@@ -32,21 +32,3 @@ authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
 export default authRouter;
 
-// const authRoutes = express.Router();
-// const jsonParser = express.json();
-
-// authRoutes.post(
-//   '/register',
-//   jsonParser,
-//   validateBody(registerSchema),
-//   ctrlWrapper(registerController),
-// );
-
-// authRoutes.post(
-//   '/login',
-//   jsonParser,
-//   validateBody(loginSchema),
-//   ctrlWrapper(loginController),
-// );
-
-// export default authRoutes;
