@@ -26,22 +26,22 @@ contactsRouter.use(authenticate);
 
 contactsRouter.get('/', ctrlWrapper(getContactsController));
 
-contactsRouter.get('/contacts', ctrlWrapper(getContactsController));
+// contactsRouter.get('/contacts', ctrlWrapper(getContactsController));
 
 contactsRouter.get(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 
 contactsRouter.delete(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   ctrlWrapper(deleteContactController),
 );
 
 contactsRouter.put(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   jsonParser,
   validateBody(createContactSchema),
@@ -49,7 +49,7 @@ contactsRouter.put(
 );
 
 contactsRouter.patch(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   jsonParser,
   validateBody(updateContactSchema),
@@ -57,7 +57,8 @@ contactsRouter.patch(
 );
 
 contactsRouter.post(
-  '/register',
+  // '/register',
+  '/',
   jsonParser,
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
