@@ -15,7 +15,7 @@ export const getAllContacts = async ({
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  const contactsQuery = ContactsCollection.find(userId);
+  const contactsQuery = ContactsCollection.find({ userId });
 
   if (filter.gender) {
     contactsQuery.where('gender').equals(filter.gender);
@@ -34,7 +34,7 @@ export const getAllContacts = async ({
   }
 
   const [contactsCount, contacts] = await Promise.all([
-    ContactsCollection.find().merge(contactsQuery).countDocuments(),
+    contactsQuery.clone().countDocuments(),
     contactsQuery
       .skip(skip)
       .limit(limit)
