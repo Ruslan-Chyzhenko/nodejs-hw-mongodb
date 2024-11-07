@@ -105,10 +105,10 @@ export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
   // const photo = req.file;
   const userId = req.user._id.toString();
-  const contact = await updateContact(userId, contactId, {
-    ...req.body,
-    photo: photoUrl,
-  });
+  // const contact = await updateContact(userId, contactId, {
+  //   ...req.body,
+  //   photo: photoUrl,
+  // });
   const photo = req.file;
 
   let photoUrl;
@@ -120,6 +120,11 @@ export const patchContactController = async (req, res, next) => {
       photoUrl = await saveFileToUploadDir(photo);
     }
   }
+
+  const contact = await updateContact(userId, contactId, {
+    ...req.body,
+    photo: photoUrl,
+  });
 
   // if (photo) {
   //   photoUrl = await saveFileToUploadDir(photo);
