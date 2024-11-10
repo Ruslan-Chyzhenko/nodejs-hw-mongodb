@@ -14,6 +14,15 @@ import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { env } from '../utils/env.js';
 
+const processPhoto = async (photo) => {
+  if (photo) {
+    return env('ENABLE_CLOUDINARY') === 'true'
+      ? await saveFileToCloudinary(photo)
+      : await saveFileToUploadDir(photo);
+  }
+  return null;
+};
+
 export const getContactsController = async (req, res, next) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
@@ -55,9 +64,10 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res) => {
-  // console.log('POST Request Body:', req.body);
   const userId = req.user._id;
-  const contact = await createContact({ ...req.body, userId });
+  const photoUrl = await processPhoto(req.file);
+
+  const contact = await createContact({ ...req.body, userId, photo: photoUrl });
 
   res.status(201).json({
     status: 201,
@@ -69,6 +79,7 @@ export const createContactController = async (req, res) => {
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const userId = req.user._id.toString();
+
   const contact = await deleteContact(userId, contactId);
 
   if (!contact) {
@@ -82,9 +93,16 @@ export const deleteContactController = async (req, res, next) => {
 export const upsertContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const userId = req.user._id.toString();
-  const result = await updateContact(userId, contactId, req.body, {
-    upsert: true,
-  });
+  const photoUrl = await processPhoto(req.file);
+
+  const result = await updateContact(
+    userId,
+    contactId,
+    { ...req.body, photo: photoUrl },
+    {
+      upsert: true,
+    },
+  );
 
   if (!result) {
     next(createHttpError(404, 'Contact not found'));
@@ -101,34 +119,15 @@ export const upsertContactController = async (req, res, next) => {
 };
 
 export const patchContactController = async (req, res, next) => {
-  console.log('PATCH Request Body:', req.body);
   const { contactId } = req.params;
-  // const photo = req.file;
+
   const userId = req.user._id.toString();
-  // const contact = await updateContact(userId, contactId, {
-  //   ...req.body,
-  //   photo: photoUrl,
-  // });
-  const photo = req.file;
-
-  let photoUrl;
-
-  if (photo) {
-    if (env('ENABLE_CLOUDINARY') === 'true') {
-      photoUrl = await saveFileToCloudinary(photo);
-    } else {
-      photoUrl = await saveFileToUploadDir(photo);
-    }
-  }
+  const photoUrl = await processPhoto(req.file);
 
   const contact = await updateContact(userId, contactId, {
     ...req.body,
     photo: photoUrl,
   });
-
-  // if (photo) {
-  //   photoUrl = await saveFileToUploadDir(photo);
-  // }
 
   if (!contact) {
     next(createHttpError(404, 'Contact not found'));
