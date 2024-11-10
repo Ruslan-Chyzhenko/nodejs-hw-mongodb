@@ -132,10 +132,6 @@ export const sendResetEmail = async (email) => {
     subject: 'Reset your password',
     html,
   });
-  throw createHttpError(
-    500,
-    'Failed to send the email, please try again later.',
-  );
 };
 
 export const resetPassword = async (payload) => {
