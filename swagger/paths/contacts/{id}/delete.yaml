@@ -1,10 +1,10 @@
-#/swagger/paths/contacts/{id}/get.yaml
+#/swagger/paths/contacts/{id}/delete.yaml
 
 tags:
   - Contacts
-summary: Get contact by id
-operationId: getContact
-description: 'Get contact by id'
+summary: Delete contact by id
+operationId: deleteContact
+description: 'Delete contact by id'
 security:
   - bearerAuth: []
 parameters:
@@ -13,10 +13,10 @@ parameters:
     required: true
     schema:
       type: string
-      example: '65e4decdd286b30065d54af9'
+      example: 65e4decdd286b30065d54af9
 responses:
-  200:
-    description: 'Get contact by id'
+  '204':
+    description: 'Delete contact by id'
     content:
       application/json:
         schema:
@@ -28,17 +28,17 @@ responses:
           properties:
             status:
               type: number
-              example: 200
+              example: 204
             message:
               type: string
-              example: 'Successfully found contact with id 65e4decdd286b30065d54af9!'
+              example: 'Contact delete successfully!'
             data:
               type: object
-              $ref: '../../../components/schemas/contact.yaml'
-  401:
+              example: {}
+  '401':
     $ref: '../../../components/responses/401.yaml'
   404:
-    description: 'Not found error'
+    description: 'Delete contact by id'
     content:
       application/json:
         schema:
@@ -57,7 +57,7 @@ responses:
           data:
             type: object
             required:
-            - message
+          - message
         properties:
           message:
             type: string
