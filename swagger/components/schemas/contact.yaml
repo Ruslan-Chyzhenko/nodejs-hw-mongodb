@@ -4,10 +4,10 @@ type: object
 required:
   - _id
   - name
-  - age
-  - gender
-  - avgMark
-  - onDuty
+  - email
+  - phoneNumber
+  - contactType
+  - userId
 properties:
   _id:
     description: "Contact's id"
@@ -17,27 +17,29 @@ properties:
     description: "Contact's name"
     type: string
     example: 'John Doe'
-  age:
-    description: "Contact's age"
-    type: number
-    example: 12
-  gender:
-    description: "Contact's age"
+  email:
+    description: "Contact's email"
     type: string
-    enum: ['male', 'female', 'other']
-  avgMark:
-    description: "Contact's average mark. Should be between 1 and 12"
-    type: number
-    example: 9.7
-  onDuty:
-    description: 'Whether is contact on duty'
+    example: jhon@example.com
+  phoneNumber:
+    description: "Contact's phone number"
+    type: string
+    example: 0957777777
+  isFavourite:
+    description: 'Whether contact is favourite'
     type: boolean
-    example: false
-  # parentId:
-  #   description: "Contact's parent id"
-  #   type: string
-  #   example: 65e4decdd286b30065d54af9
-  photo:
-    description: "Link to contact's photo"
+    default: false
+    example: true
+  contactType:
+    description: "Contact's type"
     type: string
+    enum: ['work', 'home', 'personal']
+  userId:
+    description: "Contact's user id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  photo:
+    description: "Contact's avatar"
+    type: string
+    format: binary
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
