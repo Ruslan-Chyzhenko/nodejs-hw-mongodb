@@ -65,9 +65,9 @@ responses:
                 - hasPreviousPage
               properties:
                 data:
-                type: array
+                  type: array
                 items:
-                  $ref: '../../../components/schemas/contact.yaml'
+                  $ref: ../../components/schemas/contact.yaml
                 page:
                   type: number
                   example: 2
@@ -87,4 +87,4 @@ responses:
                   type: boolean
                   example: true
   401:
-    $ref: '../../../components/responses/401.yaml'
+    $ref: ../../components/responses/401.yaml
