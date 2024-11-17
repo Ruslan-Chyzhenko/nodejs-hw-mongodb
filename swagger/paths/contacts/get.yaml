@@ -13,6 +13,12 @@ parameters:
       type: integer
       example: 1
   - in: query
+    name: perPage
+    schema:
+      type: integer
+      example: 10
+    description: 'Number of contacts on the page for pagination.'
+  - in: query
     name: sortBy
     schema:
       type: string
