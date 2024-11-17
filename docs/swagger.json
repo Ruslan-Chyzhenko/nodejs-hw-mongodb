@@ -49,6 +49,15 @@
           },
           {
             "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            },
+            "description": "Number of contacts on the page for pagination."
+          },
+          {
+            "in": "query",
             "name": "sortBy",
             "schema": {
               "type": "string",
@@ -510,33 +519,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete contact by id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "example": 204
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Contact deleted successfully!"
-                    },
-                    "data": {
-                      "type": "object",
-                      "example": {}
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Delete contact by id"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -589,19 +572,11 @@
       "contact": {
         "type": "object",
         "required": [
-          "_id",
           "name",
           "email",
-          "phoneNumber",
-          "contactType",
-          "userId"
+          "phoneNumber"
         ],
         "properties": {
-          "_id": {
-            "description": "Contact's id",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
-          },
           "name": {
             "description": "Contact's name",
             "type": "string",
